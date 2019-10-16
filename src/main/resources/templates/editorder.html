@@ -1,0 +1,51 @@
+    
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add a new item to store</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	
+	
+</head>
+<body>
+	<h1>Edit current order</h1>
+
+
+	  <form action="#" th:action="@{../saveorder}" th:object="${order}" method="post" >
+	  
+		<p>OrderNumber: <input id="*{orderNumber}" type="text" th:field="*{OrderId}" /></p>
+        
+  
+          <table class="table table-striped">
+          <tr>
+             <td>
+               <th class="custom-select" th:each="item : ${items}">
+                <input type="checkbox" th:field="*{orderItems}" th:value="${item.name}" />
+                <label th:text="${item.itemNumber}"></label>
+                 <label th:text="${item.name}"></label>
+                  <label th:text="${item.price}"></label>
+               </th>
+             </td>
+           </tr>
+        </table>
+        
+		<label for="deplist">Customer</label>
+ 			<select class="custom-select" th:field="*{customer}" >
+            <option th:each="customer: ${customer}"
+            		th:value="${customer.customerid}"
+ 					th:text="${customer.customerName}">
+ 			</option>
+         </select>	
+         <p/>
+         <p><input type="submit" value="Submit" th:value="Save" /> 	
+    </form>
+    
+    
+</body>
+<script>
+
+
+</script>
+
+</html>

@@ -1,0 +1,28 @@
+    
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add a new item to store</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Add a new item to store</h1>
+
+	  <form action="#" th:action="@{/saveitem}" th:object="${item}" method="post">
+	  
+		<p>Name: <input id="name" type="text" th:field="*{name}" /></p>
+        <p>EAN: <input id="ean" type="text" th:field="*{ean}" /></p>
+        <p>Price: <input id="price" type="text" th:field="*{price}" /></p>      
+		<p><input type="submit" value="Submit" th:value="Save" /> 
+		
+		<label for="deplist">Category</label>
+ 			<select class="custom-select" th:field="*{category}" >
+            <option th:each="category: ${categories}"
+            		th:value="${category.categoryid}"
+ 					th:text="${category.name}">
+ 			</option>
+         </select>		
+    </form>
+</body>
+</html>

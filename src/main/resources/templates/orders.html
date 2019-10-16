@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+
+    <title>Orders</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+    <li>
+    <a class="navbar-brand" href="/home">HOME</a>
+    </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="/itemlist">Itemlist</a>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="/orders">Orders</a>
+      </li>
+ 
+      <li><a id="helloName" class="navbar-brand" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</a></li>	 
+	
+	<li> <form class="nav-link" th:action="@{/logout}" method="post"> <input   type="submit" value="Sign Out"/> </form> </li> 
+    </ul>
+  </div>
+</nav>
+</head>
+<body>
+
+<div class="jumbotron">
+
+<h1>Current customers <a href="/addcustomer" class="btn btn-success">New customer</a></h1>
+    <table class="table table-striped">
+
+		    <th>Customer number</th>
+		    <th>customerName</th>
+
+
+    	<tr th:each = "customer: ${customers}">    
+		<td th:text="${customer.customerNumber}"></td>
+		<td th:text="${customer.customerName}"></td>
+		<td> <button type="button" class="btn btn-danger" > <a th:href="@{/deletecustomer/{id}(id=${customer.customerid})}">Delete</a></button> <button type="button" class="btn btn-danger" > <a th:href="@{/editcustomer/{id}(id=${customer.customerid})}">Edit</a></button></td> 
+		<td> </td>	
+    	</tr>
+     </table>
+     
+     
+	</div>
+
+<div class="jumbotron">
+<h1>Orders <a href="/neworder" class="btn btn-success">New order</a></h1>
+    <table class="table table-striped">
+
+		    <th>Order number</th>
+		    <th>items in the order</th>
+		    <th>Customer name</th>
+
+
+    	<tr th:each = "customerOrder: ${orders}">    
+		<td th:text="${customerOrder.OrderId}"></td>
+		<td th:text="${customerOrder.orderItems}"></td>
+		<td th:text="${customerOrder.customer.customerName}"></td>
+
+
+		<td> <button type="button" class="btn btn-danger" > <a th:href="@{/delete/{id}(id=${customerOrder.OrderId})}">Delete</a></button> <button type="button" class="btn btn-danger" > <a th:href="@{/pdfreport/{id}(id=${customerOrder.OrderId})}" target="_blank">Print</a></button> <button type="button" class="btn btn-danger" > <a th:href="@{/editorder/{id}(id=${customerOrder.OrderId})}">Edit</a></button></td> 
+		<td> </td> 
+		<td> </td>	
+    	</tr>
+     </table>
+	
+	</div>
+
+
+
+</body>
+</html>

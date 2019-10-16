@@ -1,0 +1,42 @@
+body{
+background-image: url('https://images.pexels.com/photos/1005417/pexels-photo-1005417.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+background-size : 100% auto;
+}
+.blended_grid{
+display : block;
+width : 900px;
+overflow : auto;
+margin : 30px auto 0 auto;
+}
+.pageHeader{
+
+float : left;
+clear : none;
+height : 200px;
+width : 900px;
+}
+.pageLeftMenu{
+
+float : left;
+clear : none;
+height : 600px;
+width : 33%;
+margin-left: 6px;
+border-style: solid;
+}
+.jumbotron{
+overflow: scroll;
+height:400px;
+border-style: solid;
+margin: 10px;
+background-color: 0.2;
+opacity: 0.85;
+}
+
+.helloName{
+margin-left: 100px;
+}
+
+}
+
+

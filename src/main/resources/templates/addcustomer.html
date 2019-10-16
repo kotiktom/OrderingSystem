@@ -1,0 +1,22 @@
+    
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add a new client</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Add a new client for the store</h1>
+
+	  <form action="#" th:action="@{/savecustomer}" th:object="${customer}" method="post">
+	  
+		<p>Name: <input id="*{customerName}" type="text" th:field="*{customerName}" /></p>
+        <p>Address: <input id="*{customerAddress}" type="text" th:field="*{customerAddress}" /></p>
+        <p>Email: <input id="*{customerEmail}" type="text" th:field="*{customerEmail}" /></p>
+        <p>Phone: <input id="*{customerPhone}" type="text" th:field="*{customerPhone}" /></p>    
+        <p>Customer Number: <input id="*{customerNumber}" type="text" th:field="*{customerNumber}" /></p>          
+		<p><input type="submit" value="Submit" th:value="Save" /> 	
+    </form>
+</body>
+</html>
