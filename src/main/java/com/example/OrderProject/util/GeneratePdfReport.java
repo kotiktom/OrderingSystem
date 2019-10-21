@@ -18,9 +18,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Collections;
+import java.util.Objects;
 
 public class GeneratePdfReport {
 	
@@ -35,7 +35,7 @@ public class GeneratePdfReport {
 
     public static ByteArrayInputStream itemsReport(Long testid, ItemRepository itemRepository, CustomerOrderRepository orderrepository) {
     	
-    	String orderNumber = orderrepository.findById(testid).get().getOrderNumber();
+
     	String customerAddress = orderrepository.findById(testid).get().getCustomer().getCustomerAddress();
     	String customerEmail = orderrepository.findById(testid).get().getCustomer().getCustomerEmail();
     	String customerName = orderrepository.findById(testid).get().getCustomer().getCustomerName();
@@ -44,7 +44,7 @@ public class GeneratePdfReport {
     	
     	
     	ArrayList<String> itemlist = orderrepository.findById(testid).get().getOrderItems();
-
+    	ArrayList<Integer> amountlist = orderrepository.findById(testid).get().getItemAmount();
     
         Document document = new Document();
 
@@ -54,7 +54,7 @@ public class GeneratePdfReport {
         try {
         	Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         
-            PdfPTable orderTable = new PdfPTable(3);
+            PdfPTable orderTable = new PdfPTable(5);
             orderTable.setWidthPercentage(90);
             orderTable.setPaddingTop(200);
                 
@@ -63,6 +63,13 @@ public class GeneratePdfReport {
             
 
             PdfPCell hcell;
+            
+            hcell = new PdfPCell(new Phrase("QTY", headFont));
+            hcell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            hcell.setBorder(Rectangle.NO_BORDER);
+            hcell.setBorder(Rectangle.BOTTOM | Rectangle.TOP);
+            hcell.setPadding(5);
+            orderTable.addCell(hcell);
     
             hcell = new PdfPCell(new Phrase("ITEM NUMBER", headFont));
             hcell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -83,18 +90,44 @@ public class GeneratePdfReport {
             hcell.setBorder(Rectangle.BOTTOM | Rectangle.TOP);
             hcell.setPadding(5);
             orderTable.addCell(hcell);
+            
+            hcell = new PdfPCell(new Phrase("AMOUNT", headFont));
+            hcell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            hcell.setBorder(Rectangle.BOTTOM | Rectangle.TOP);
+            hcell.setPadding(5);
+            orderTable.addCell(hcell);
          
 
                 PdfPCell Namecell;
                 PdfPCell PriceCell;
                 PdfPCell EanCell;
-
+                
+                double totalSum = 0;
+                ArrayList preventDouble = new ArrayList();
+                
                 for (int i = 0; i < itemlist.size(); i++) {
                 	String item = new String(itemlist.get(i).toString());
+                	int amount = amountlist.get(i);
+                	amountlist.removeIf(Objects::isNull);
+                		  
                 	String itemName = itemRepository.FindByParamName(item);
                 	String itemPrice = itemRepository.FindByParamPrice(item);
+                	
+                	double toDouble = Double.parseDouble(itemPrice);
+                	toDouble = toDouble * amount;
+                	totalSum = totalSum + toDouble;
+                	
+                	String AmountToString = Double.toString(toDouble);
+                	String occurrencesToString = Integer.toString(amount);
+                	
                 	String itemNumber = itemRepository.FindByParamNumber(item);
                 	
+                	if (!preventDouble.contains(item) ) {
+                	
+                    Namecell = new PdfPCell(new Paragraph(occurrencesToString));
+                	Namecell.setBorder(Rectangle.NO_BORDER);
+                	Namecell.setPaddingTop(15);
+                	orderTable.addCell(Namecell);
                 
                 	Namecell = new PdfPCell(new Paragraph(itemNumber));
                 	Namecell.setBorder(Rectangle.NO_BORDER);
@@ -106,25 +139,19 @@ public class GeneratePdfReport {
                 	PriceCell.setPaddingTop(15);
                 	orderTable.addCell(PriceCell);
                 	
-                	EanCell = new PdfPCell(new Paragraph(itemPrice));
+                	EanCell = new PdfPCell(new Paragraph((itemPrice)));
+                	EanCell.setBorder(Rectangle.NO_BORDER);
+                	EanCell.setPaddingTop(15);
+                	orderTable.addCell(EanCell);
+                	
+                	EanCell = new PdfPCell(new Paragraph((AmountToString)));
                 	EanCell.setBorder(Rectangle.NO_BORDER);
                 	EanCell.setPaddingTop(15);
                 	orderTable.addCell(EanCell);
                 	}
-                
-                
-
-                
-               
-                double invoicetotal = 0;
-                for (int i = 0; i < itemlist.size(); i++) {
-                	
-                	String item = new String(itemlist.get(i).toString());
-                	Double itemPrice = itemRepository.FindByParamPrice2(item);
-                
-                	invoicetotal = invoicetotal + itemPrice;
-                	}
-                
+                	preventDouble.add(item);
+            
+                }
                 
                 PdfPTable totaltable = new PdfPTable(2);
                 totaltable.setWidthPercentage(48);
@@ -138,7 +165,7 @@ public class GeneratePdfReport {
             totaltable.addCell(totalCell);
 
                 
-                totalCell = new PdfPCell(new Paragraph(String.valueOf("Total: " + invoicetotal), total));
+                totalCell = new PdfPCell(new Paragraph(String.valueOf("Total: " + totalSum), total));
              totalCell.setBorder(Rectangle.NO_BORDER);
                totalCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 totalCell.setPaddingTop(20);
@@ -191,7 +218,6 @@ public class GeneratePdfReport {
             paymentinfo.add("");
             
             
-            PdfPTable footertable = new PdfPTable(1);
             
             Paragraph footer = new Paragraph(String.format(
                     "Please wire the amount due to our bank account using the following banking information:"));

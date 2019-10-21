@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.OrderProject.domain.Category;
 import com.example.OrderProject.domain.CategoryRepository;
 import com.example.OrderProject.domain.Customer;
 import com.example.OrderProject.domain.CustomerOrder;
@@ -111,7 +112,6 @@ public class OrderController {
 		model.addAttribute("items", repository.findAll());
 		return "itemlist";
 		}
-
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String Home(Model model) {
@@ -129,6 +129,13 @@ public class OrderController {
 	
 	
 	// ↓↓ PAGES FOR ADDING NEW CUSTOMERS/ITEMS/ORDERS ↓↓
+	
+	@RequestMapping(value = "/addcategory")
+	 @PreAuthorize("hasAuthority('ADMIN')")
+	public String AddCategory(Model model) {
+		model.addAttribute("category", new Category());
+		return "addcategory";
+		}
 
 	@RequestMapping(value = "/addcustomer")
 	 @PreAuthorize("hasAuthority('ADMIN')")
@@ -143,7 +150,6 @@ public class OrderController {
 	public String AddItem(Model model) {
 		model.addAttribute("item", new Item());
 		model.addAttribute("categories", crepository.findAll());
-		model.addAttribute("prices", crepository.findAll());
 		return "additem";
 		}
 	
@@ -159,6 +165,12 @@ public class OrderController {
 	
 	
 	// ↓↓  SAVING AND DELETING ITEMS/ORDERS/CUSTOMERS ↓↓
+	
+	@RequestMapping(value = "/savecategory", method = RequestMethod.POST)
+	public String save(Category category) {
+		crepository.save(category);
+		return "redirect:itemlist";
+		}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Item item) {

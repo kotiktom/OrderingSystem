@@ -1,0 +1,19 @@
+    
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add a new client</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Create a new category</h1>
+
+	  <form action="#" th:action="@{/savecategory}" th:object="${category}" method="post">
+	  
+		<p>Name: <input id="*{name}" type="text" th:field="*{name}" /></p>
+     
+		<p><input type="submit" value="Submit" th:value="Save" /> 	
+    </form>
+</body>
+</html>

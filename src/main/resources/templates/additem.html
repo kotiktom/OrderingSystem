@@ -9,11 +9,11 @@
 <body>
 	<h1>Add a new item to store</h1>
 
-	  <form action="#" th:action="@{/saveitem}" th:object="${item}" method="post">
+	  <form action="#" th:action="@{/save}" th:object="${item}" method="post">
 	  
 		<p>Name: <input id="name" type="text" th:field="*{name}" /></p>
         <p>EAN: <input id="ean" type="text" th:field="*{ean}" /></p>
-        <p>Price: <input id="price" type="text" th:field="*{price}" /></p>      
+        <p>Price: <input id="price" type="text" th:field="*{price}" /></p> 
 		<p><input type="submit" value="Submit" th:value="Save" /> 
 		
 		<label for="deplist">Category</label>

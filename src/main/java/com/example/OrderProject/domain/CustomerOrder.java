@@ -23,7 +23,7 @@ public class CustomerOrder {
 	private String orderNumber;
 
 	private ArrayList<String> orderItems;
-	
+	private ArrayList<Integer> itemAmount;
 	
 	@ManyToOne
 	@JsonIgnore
@@ -32,6 +32,12 @@ public class CustomerOrder {
 	
 	
 
+	public ArrayList<Integer> getItemAmount() {
+		return itemAmount;
+	}
+	public void setItemAmount(ArrayList<Integer> itemAmount) {
+		this.itemAmount = itemAmount;
+	}
 	public long getOrderId() {
 		return OrderId;
 	}
@@ -57,10 +63,11 @@ public class CustomerOrder {
 	public void setOrderItems(ArrayList<String> orderItems) {
 		this.orderItems = orderItems;
 	}
-	public CustomerOrder(String orderNumber, ArrayList<String> orderItems, Customer customer) {
+	public CustomerOrder(String orderNumber, ArrayList<String> orderItems ,ArrayList<Integer> itemAmount , Customer customer) {
 		
 		this.orderNumber = orderNumber;
 		this.orderItems = orderItems;
+		this.itemAmount = itemAmount;
 		this.customer = customer;
 	}
 	public CustomerOrder() {

@@ -1,7 +1,11 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
+<style>
 
+.jumbotron {
+overflow: scroll;}]
+</style>
     <title>Orders</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
@@ -59,12 +63,14 @@
 
 		    <th>Order number</th>
 		    <th>items in the order</th>
+		    <th>Item amount in the order</th>
 		    <th>Customer name</th>
 
 
     	<tr th:each = "customerOrder: ${orders}">    
 		<td th:text="${customerOrder.OrderId}"></td>
 		<td th:text="${customerOrder.orderItems}"></td>
+		<td th:text="${customerOrder.itemAmount}"></td>
 		<td th:text="${customerOrder.customer.customerName}"></td>
 
 

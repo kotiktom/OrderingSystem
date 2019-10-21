@@ -38,7 +38,6 @@
 		    <th>Price</th>
 		    <th>Category</th>
 
-
     	<tr th:each = "item: ${items}">    
 		<td th:text="${item.name}"></td>
 		<td th:text="${item.ean}"></td>
@@ -50,6 +49,7 @@
     	</tr>
      </table>
        <a sec:authorize="hasAuthority('ADMIN')" href="/additem" class="btn btn-success">Create a new item</a>
+       <a sec:authorize="hasAuthority('ADMIN')" href="/addcategory" class="btn btn-success">Create a new category</a>
 
 </body>
 </html>

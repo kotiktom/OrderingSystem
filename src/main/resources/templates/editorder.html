@@ -22,6 +22,7 @@
              <td>
                <th class="custom-select" th:each="item : ${items}">
                 <input type="checkbox" th:field="*{orderItems}" th:value="${item.name}" />
+                <input type="number" min="0" oninput="this.value = Math.abs(this.value)" th:field="*{itemAmount}"/>
                 <label th:text="${item.itemNumber}"></label>
                  <label th:text="${item.name}"></label>
                   <label th:text="${item.price}"></label>

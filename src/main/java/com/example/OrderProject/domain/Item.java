@@ -1,6 +1,7 @@
 package com.example.OrderProject.domain;
 
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,15 +28,18 @@ public class Item {
 	
 	@ManyToOne
 	@JsonIgnore
-	@JoinColumn(name = "priceid")
-	private ItemPrice itemprice;
-	
-	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name = "categoryid")
 	private Category category;
 	
 	
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	public String getItemNumber() {
 		return itemNumber;
@@ -77,30 +81,18 @@ public class Item {
 		this.price = price;
 	}
 
-	public Category getCategory() {
-		return category;
-	}
 
-	public void setCategory(Category category) {
+	public void setItemprice(Category category) {
 		this.category = category;
 	}
 
-	public ItemPrice getItemprice() {
-		return itemprice;
-	}
-
-	public void setItemprice(ItemPrice itemprice) {
-		this.itemprice = itemprice;
-	}
-
-	public Item(String itemNumber, String name, String ean, double price, Category category, ItemPrice itemprice) {
+	public Item(String itemNumber, String name, String ean, double price, Category category) {
 		super();
 		this.itemNumber = itemNumber;
 		this.name = name;
 		this.ean = ean;
 		this.price = price;
 		this.category = category;
-		this.itemprice = itemprice;
 	}
 
 	public Item() {

@@ -5,43 +5,58 @@
     <title>Add a new item to store</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<style>
+	.jumbotron {
 	
+	height:200px;
+	border-style: solid;
+	margin: 10px;
+	background-color: 0.2;
+	opacity: 0.85;
+	}
 	
+	.custom-select {
+	position: fixed;
+	bottom: 2%;
+	}
+	
+	input[type=checkbox] {
+    transform: scale(3.0);
+}
+	</style>
 </head>
+
 <body>
 	<h1>Create a new order</h1>
 
-	  <form action="#" th:action="@{/saveorder}" th:object="${order}" method="post">
- 
+	  <form action="#" th:action="@{/saveorder}" th:object="${order}" method="post"> 
           <table class="table table-striped">
           <tr>
-             <td>
-               <th class="custom-select" th:each="item : ${items}">
-                <input type="checkbox" th:field="*{orderItems}" th:value="${item.name}" />1
-                <input type="checkbox" th:field="*{orderItems}" th:value="${item.name}" />2
-                <input type="checkbox" th:field="*{orderItems}" th:value="${item.name}" />3
-                <input type="checkbox" th:field="*{orderItems}" th:value="${item.name}" />4
-                <label th:text="${item.itemNumber}"></label>
-                 <label th:text="${item.name}"></label>
-                  <label th:text="${item.price}"></label>
-                  
-               </th>    
+               <div class="container" th:each="item : ${items}">
+               <div class="jumbotron">
+               Check to add item:_  <input type="checkbox" th:field="*{orderItems}" th:value="${item.name}"/>_ Amount:   
+                <input type="number" min="0" oninput="this.value = Math.abs(this.value)" th:field="*{itemAmount}"/>
+                <br><br>
+                 <h5>Description: <a th:text="${item.name}"></a></h5>
+                 <h5>Price: <a th:text="${item.price}"></a></h5>
+                 </div>                                
+               </div>    
            </tr>
         </table>
-        
-		<p><input type="submit" value="Submit" th:value="Save" /> 
-		
-		<label for="deplist">Customer</label>
+           
+		<label for="jumbotron">Customer</label>
  			<select class="custom-select" th:field="*{customer}" >
             <option th:each="customer: ${customer}"
             		th:value="${customer.customerid}"
  					th:text="${customer.customerName}">
  			</option>
-         </select>		
+ 		 </select>	
+ 		 
+ 		 <p><input class="custom-select" type="submit" value="Submit" th:value="Save" /> 	
     </form>
-    
     
 </body>
 <script>
