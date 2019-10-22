@@ -29,16 +29,17 @@ import com.example.OrderProject.domain.LoginRepository;
 
 
 @SpringBootApplication
-	public class OrderProjectApplication extends SpringBootServletInitializer {
-@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder
-application) {
-	return application.sources(OrderProjectApplication.class);
-}
-	public static void main(String[] args) throws Exception {
-	SpringApplication.run(OrderProjectApplication.class, args);
+public class OrderProjectApplication extends SpringBootServletInitializer {
 
-}
+    public static void main(String[] args) {
+        SpringApplication.run(OrderProjectApplication.class, args);
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(OrderProjectApplication.class);
+    }
+
 
 
 	

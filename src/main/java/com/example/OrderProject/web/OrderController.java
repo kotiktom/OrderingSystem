@@ -78,7 +78,7 @@ public class OrderController {
 	    
 	 @RequestMapping(value="/login")
 	    public String login() {	
-	        return "login";
+	        return "/login";
 	    }
 	
 	 // ↓↓ API SECTION ↓↓
@@ -110,13 +110,18 @@ public class OrderController {
 	@RequestMapping(value = "/itemlist", method = RequestMethod.GET)
 	public String BookList(Model model) {
 		model.addAttribute("items", repository.findAll());
-		return "itemlist";
+		return "/itemlist";
 		}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String Home(Model model) {
-		model.addAttribute("orders", orderRepository.findAll());
-		
+	public String Home2(Model model) {
+		model.addAttribute("orders", orderRepository.findAll());	
+		return "home";
+		}
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String Home1(Model model) {
+		model.addAttribute("orders", orderRepository.findAll());	
 		return "home";
 		}
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
@@ -200,21 +205,21 @@ public class OrderController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteOrder(@PathVariable("id") Long id, Model model) {
 		orderRepository.deleteById(id);
-        return "redirect:../orders";
+        return "redirect:/orders";
     	}
 	
 	@RequestMapping(value = "/deleteitem/{id}", method = RequestMethod.GET)
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteItem(@PathVariable("id") Long id, Model model) {
 		repository.deleteById(id);
-        return "redirect:../itemlist";
+        return "redirect:/itemlist";
     	}
 	
 	@RequestMapping(value = "/deletecustomer/{id}", method = RequestMethod.GET)
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deletecustomer(@PathVariable("id") Long id, Model model) {
 		cusrepo.deleteById(id);
-        return "redirect:../orders";
+        return "redirect:/orders";
     	}
    
    
@@ -223,13 +228,13 @@ public class OrderController {
     	model.addAttribute("item", repository.findById(id));
     	model.addAttribute("categories", crepository.findAll());
     	System.out.println("jesus" + 2);
-    	return "edititem";
+    	return "/edititem";
     }
     
     @RequestMapping(value = "/editcustomer/{id}")
     public String editCustomer(@PathVariable("id") Long id, Model model) {
     	model.addAttribute("customer", cusrepo.findById(id));
-    	return "editcustomer";
+    	return "/editcustomer";
     }
     
     @RequestMapping(value = "/editorder/{id}")
@@ -237,7 +242,7 @@ public class OrderController {
     	model.addAttribute("order", orderRepository.findById(id));
 		model.addAttribute("customer", cusrepo.findAll());
     	model.addAttribute("items", repository.findAll());
-    	return "editorder";
+    	return "/editorder";
     }
     // ↑↑ SAVING AND DELETING ITEMS/ORDERS/CUSTOMERS ↑↑
 }

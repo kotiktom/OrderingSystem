@@ -22,8 +22,8 @@ public class Item {
 	@Id long id;
 	
 	public String itemNumber;
-	public  String name;
-	public  String ean;
+	public String name;
+	public String ean;
 	public double price;
 	
 	@ManyToOne
@@ -87,7 +87,7 @@ public class Item {
 	}
 
 	public Item(String itemNumber, String name, String ean, double price, Category category) {
-		super();
+		
 		this.itemNumber = itemNumber;
 		this.name = name;
 		this.ean = ean;
