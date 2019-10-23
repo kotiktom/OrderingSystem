@@ -5,18 +5,32 @@
     <title>Add a new client</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+    
+    <style>
+    .jumbotron {
+
+	border-style: solid;
+	margin: 10px;
+	background-color: 0.2;
+    }
+    
+    
+    </style>
 </head>
 <body>
-	<h1>Add a new client for the store</h1>
+	<h1 id="h1">Add a new client for the store</h1>
 
+	<div class="jumbotron">
 	  <form action="#" th:action="@{/savecustomer}" th:object="${customer}" method="post">
 	  
-		<p>Name: <input id="*{customerName}" type="text" th:field="*{customerName}" /></p>
-        <p>Address: <input id="*{customerAddress}" type="text" th:field="*{customerAddress}" /></p>
-        <p>Email: <input id="*{customerEmail}" type="text" th:field="*{customerEmail}" /></p>
-        <p>Phone: <input id="*{customerPhone}" type="text" th:field="*{customerPhone}" /></p>    
-        <p>Customer Number: <input id="*{customerNumber}" type="text" th:field="*{customerNumber}" /></p>          
-		<p><input type="submit" value="Submit" th:value="Save" /> 	
+		<h4>Name: <input type="text" th:field="*{customerName}" /></h4>
+        <h4>Address: <input type="text" th:field="*{customerAddress}" /></h4>
+        <h4>Email: <input type="text" th:field="*{customerEmail}" /></h4>
+        <h4>Phone: <input type="text" th:field="*{customerPhone}" /></h4>    
+        <h4>Customer Number: <input id="h4" type="text" th:field="*{customerNumber}" /></h4>          
+		<input class="custom-select" type="submit" value="Submit" th:value="Save" /> 	
     </form>
+    </div>
 </body>
 </html>

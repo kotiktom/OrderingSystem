@@ -4,6 +4,8 @@
     <title>Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -19,11 +21,14 @@
       <li class="nav-item">
         <a class="navbar-brand" href="/orders">Orders</a>
       </li>
+        <li class="nav-item">
+        <a class="navbar-brand" href="/apiinfo">API info</a>
+      </li>
  
       <li>
       <li><a id="helloName" class="navbar-brand" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</a></li>	  
 	
-	<li> <form class="nav-link" th:action="@{/OrderProject/logout}" method="post"> <input type="submit" value="Sign Out"/> </form> </li> 
+	<li> <form class="nav-link" th:action="@{/logout}" method="post"> <input type="submit" value="Sign Out"/> </form> </li> 
     </ul>
   </div>
 </nav>
@@ -32,13 +37,11 @@
 <body>
 
 <div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-</div>
-	
+  <h1 class="display-4">Welcome!</h1>
+  <p class="lead">This is a simple ordering system project created by Tommi Kotikangas</p>
+  <p class="lead">The project uses Spring Boot as backend and Thymeleaf as front-end.</p>
+  <p class="lead">This is a forever project, in which I will do my best to continuously update and create more functions so you can get your thousand pair of shoes you've always wanted!.</p>
 
+</div>	
 </body>
 </html>

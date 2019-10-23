@@ -1,30 +1,53 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add student</title>
+    <title>Signup</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+    .jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
+  border-style: solid;
+	background-color: 0.2;
+}
+body{
+background-image: url('https://images.pexels.com/photos/1005417/pexels-photo-1005417.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+background-size : 100% auto;
+}
+div {
+ margin: auto;
+ width: 50%;
+}
 
+#signup {
+
+color: black;
+padding: 10px;
+}
+    </style>  
 </head>
 <body>
 	<h1>Sign-up</h1>
-     <div class="col-md-4">
+     <div class="jumbotron">
 		<form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
 			<div>
-				<label> Username :<input type="text" th:field="*{username}" class="form-control"/></label>
+				<h3> Username :<input type="text" th:field="*{username}" class="form-control"/></h3>
 				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>	
 			</div>
 			
 			<div>
-				<label> Email :<input type="text" th:field="*{email}" class="form-control"/></label>
+				<h3> Email :<input type="text" th:field="*{email}" class="form-control"/></h3>
 				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Username Error</p>	
 			</div>
 			
 			<div>
-				<label> Password :<input type="password" th:field="*{password}" class="form-control"/></label>
+				<h3> Password :<input type="password" th:field="*{password}" class="form-control"/></h3>
 				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>	
 			</div>
 			<div>
-				<label> Re-type Password: <input type="password" th:field="*{passwordCheck}" class="form-control"/></label>
+				<h3> Re-type Password: <input type="password" th:field="*{passwordCheck}" class="form-control"/></h3>
 				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
 			</div>
 			

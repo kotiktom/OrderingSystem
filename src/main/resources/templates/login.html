@@ -3,22 +3,53 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">  
  
     <head>
+    <style>
+    .jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
+  border-style: solid;
+	background-color: 0.2;
+}
+body{
+background-image: url('https://images.pexels.com/photos/1005417/pexels-photo-1005417.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+background-size : 100% auto;
+}
+div {
+ margin: auto;
+ width: 50%;
+}
+
+#signup {
+
+color: black;
+padding: 10px;
+}
+    </style>    
+    
    <title>Login </title>
     </head>
     <body>
-        <div  th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
+    
+    
+
+	<div class="jumbotron">
+	<h1>Testing credentials: admin, admin</h1>
+	<div  th:if="${param.logout}">
+            <h2>You have been logged out.</h2>
         </div>
         
-
+      <div  th:if="${param.error}">
+          <h2> Invalid username and password.</h2>
+        </div>  
+	
         <form  th:action="@{/login}" method="post">
-            <div class="form-group"><label> User Name : <input type="text" name="username"/> </label></div>
-            <div class="form-group"><label> Password: <input type="password" name="password"/> </label></div>
+            <div class="form-group"><h3> User Name : <input type="text" name="username"/> </h3></div>
+            <div class="form-group"><h3> Password: <input type="password" name="password"/> </h3></div>
             <div class="form-group"><input type="submit" value="Sign In"/></div>
         </form>
-        <a th:href="@{/signup}">Sign-up</a>
+        <a id="signup" th:href="@{/signup}">Sign-up</a>
+        </div>
     </body>
 </html>

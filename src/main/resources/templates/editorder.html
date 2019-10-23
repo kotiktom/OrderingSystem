@@ -4,44 +4,89 @@
 <head>
     <title>Add a new item to store</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<style>
+	.jumbotron {
 	
+	height:200px;
+	border-style: solid;
+	margin: 10px;
+	background-color: 0.2;
+	opacity: 0.85;
+	}
 	
+	#save {
+	position: fixed;
+	bottom: 0%;
+	}
+	
+	#small {
+	width: 75px;
+	}
+	
+	#customer {
+	display: block;
+	margin-bottom: 25px;
+	width: 50%;
+	margin-left: auto;
+ 	margin-right: auto;
+	}
+	
+	#cusinf {
+text-align: center;
+	}
+	
+	input[type=checkbox] {
+    transform: scale(3.0);
+}
+
+input[type=number] {
+    width: 50px;
+}
+	</style>
 </head>
+
 <body>
-	<h1>Edit current order</h1>
+	<h1>Create a new order</h1>
+	
+	<h3>Use &nbsp; <input type="checkbox">&nbsp; to add items to your order</h3>
+	<h3>Use &nbsp; <input id="small" type="number" min="0" oninput="this.value = Math.abs(this.value)" >&nbsp; to select amount of items</h3>
 
-
-	  <form action="#" th:action="@{../saveorder}" th:object="${order}" method="post" >
-	  
-		<p>OrderNumber: <input id="*{orderNumber}" type="text" th:field="*{OrderId}" /></p>
-        
-  
-          <table class="table table-striped">
-          <tr>
-             <td>
-               <th class="custom-select" th:each="item : ${items}">
-                <input type="checkbox" th:field="*{orderItems}" th:value="${item.name}" />
-                <input type="number" min="0" oninput="this.value = Math.abs(this.value)" th:field="*{itemAmount}"/>
-                <label th:text="${item.itemNumber}"></label>
-                 <label th:text="${item.name}"></label>
-                  <label th:text="${item.price}"></label>
-               </th>
-             </td>
-           </tr>
-        </table>
-        
-		<label for="deplist">Customer</label>
- 			<select class="custom-select" th:field="*{customer}" >
+	  <form action="#" th:action="@{../saveorder}" th:object="${order}" method="post"> 
+	  <h3 id="cusinf">Select customer</h3>
+	  <label for="deplist"></label>
+ 			<select id="customer" class="custom-select"  th:field="*{customer}" >
             <option th:each="customer: ${customer}"
             		th:value="${customer.customerid}"
- 					th:text="${customer.customerName}">
+ 					th:text="${customer.customerName}">		
  			</option>
-         </select>	
-         <p/>
-         <p><input type="submit" value="Submit" th:value="Save" /> 	
+ 		 </select>	
+	  
+	  
+	  
+          <table class="table table-striped">
+          <tr>
+          		<h3 id="cusinf">Select items for order</h3>
+               <div class="container" th:each="item : ${items}">
+               <div class="jumbotron">
+               <input type="hidden" th:field="*{OrderId}"  th:value="${OrderId}"/>
+               <input type="checkbox" th:field="*{orderItems}"  th:value="${item.name}"/> &nbsp;  &nbsp;
+                <input type="number" min="0" oninput="this.value = Math.abs(this.value)" th:field="*{itemAmount}"/>
+                <br><br>
+                 <h5>Description: <a th:text="${item.name}"></a></h5>
+                 <h5>Price: <a th:text="${item.price}"></a></h5>
+                 </div>                                
+               </div>    
+           </tr>
+        </table>
+		
+ 	
+ 		 
+ 		 <p><input id="save" class="custom-select" type="submit" value="Submit" th:value="Save" /> 	
     </form>
-    
     
 </body>
 <script>

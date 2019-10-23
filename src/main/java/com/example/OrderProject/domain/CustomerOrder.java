@@ -36,7 +36,10 @@ public class CustomerOrder {
 		return itemAmount;
 	}
 	public void setItemAmount(ArrayList<Integer> itemAmount) {
-		this.itemAmount = itemAmount;
+		if (itemAmount != null) {
+			this.itemAmount = itemAmount;
+		}
+		
 	}
 	public long getOrderId() {
 		return OrderId;
@@ -57,7 +60,7 @@ public class CustomerOrder {
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
 	}
-	public ArrayList getOrderItems() {
+	public ArrayList<String> getOrderItems() {
 		return orderItems;
 	}
 	public void setOrderItems(ArrayList<String> orderItems) {

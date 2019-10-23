@@ -3,8 +3,15 @@
 <head>
 <style>
 
-.jumbotron {
-overflow: scroll;}]
+.jumbotron{
+height:400px;
+border-style: solid;
+margin: 10px;
+background-color: 0.2;
+opacity: 0.85;
+overflow: scroll;
+}
+
 </style>
     <title>Orders</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -27,6 +34,9 @@ overflow: scroll;}]
       <li class="nav-item">
         <a class="navbar-brand" href="/orders">Orders</a>
       </li>
+        <li class="nav-item">
+        <a class="navbar-brand" href="/apiinfo">API info</a>
+      </li>
  
       <li><a id="helloName" class="navbar-brand" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</a></li>	 
 	
@@ -44,12 +54,15 @@ overflow: scroll;}]
 
 		    <th>Customer number</th>
 		    <th>customerName</th>
+			<th></th>
 
 
     	<tr th:each = "customer: ${customers}">    
 		<td th:text="${customer.customerNumber}"></td>
 		<td th:text="${customer.customerName}"></td>
-		<td> <button type="button" class="btn btn-danger" > <a th:href="@{/deletecustomer/{id}(id=${customer.customerid})}">Delete</a></button> <button type="button" class="btn btn-danger" > <a th:href="@{/editcustomer/{id}(id=${customer.customerid})}">Edit</a></button></td> 
+		<td> <button type="button" class="btn btn-danger" > <a th:href="@{/deletecustomer/{id}(id=${customer.customerid})}">Delete</a></button> 
+		<button type="button" class="btn btn-danger" > <a th:href="@{/editcustomer/{id}(id=${customer.customerid})}">Edit</a></button>
+		</td> 
 		<td> </td>	
     	</tr>
      </table>

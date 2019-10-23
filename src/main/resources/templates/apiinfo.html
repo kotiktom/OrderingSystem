@@ -1,26 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-
-<style>
-.jumbotron {
-height: 600px;
-overflow: scroll;
-
-</style>
-    <title>Itemlist</title>
+    <title>API information</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
         <link rel="stylesheet" type="text/css" href="/css/style.css">
     
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
- 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li>
+    <li>
     <a class="navbar-brand" href="/home">HOME</a>
     </li>
       <li class="nav-item">
@@ -29,48 +21,36 @@ overflow: scroll;
       <li class="nav-item">
         <a class="navbar-brand" href="/orders">Orders</a>
       </li>
-        <li class="nav-item">
+       <li class="nav-item">
         <a class="navbar-brand" href="/apiinfo">API info</a>
       </li>
-    
+ 
+      <li>
       <li><a id="helloName" class="navbar-brand" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</a></li>	  
 	
-	<li> <form class="nav-link" th:action="@{/OrderProject/logout}" method="post"> <input type="submit" value="Sign Out"/> </form> </li> 
+	<li> <form class="nav-link" th:action="@{/logout}" method="post"> <input type="submit" value="Sign Out"/> </form> </li> 
     </ul>
   </div>
 </nav>
 </head>
+
 <body>
 
 <div class="jumbotron">
-	<h1>Items
-	<a sec:authorize="hasAuthority('ADMIN')" href="/additem" class="btn btn-success">Create a new item</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="/addcategory" class="btn btn-success">Create a new category</a> </h1>
-    <table class="table table-striped">
+  <h1 class="display-4">Welcome to the API information section!</h1>
+  <p class="lead">This ordering system includes a simple API</p>
+  <p class="lead">Which can be used to retrieve orders, items and customers inside the system.</p>
+  <p class="lead">The API will be part of a future React project but more of that on a later date!</p>
+</div>
 
-			<th>ID</th>
-		    <th>Name</th>
-		    <th>EAN</th>
-		    <th>Price</th>
-		    <th>Category</th>
-		    <th></th>
+<div class="jumbotron">
+<h1 class="display-4">Links to the API output</h1>
 
-    	<tr th:each = "item: ${items}">  
-    	
-    	 <td th:text="${item.id}"></td>
-		<td th:text="${item.name}"></td>
-		<td th:text="${item.ean}"></td>
-		<td th:text="${item.price}"></td>
-		<td th:text="${item.category.name}"></td>
-
-		<td> <button type="button" class="btn btn-danger" > <a th:href="@{/deleteitem/{id}(id=${item.id})}">Delete</a></button> 
-		<button type="button" class="btn btn-danger" > <a th:href="@{/edit/{id}(id=${item.id})}">Edit</a></button>	
-		</td> 
- 
-    	</tr>
-     </table>
-       
+  <p class="lead"><a th:href="@{/api/orders}" target="_blank">tommistavern.website/api/orders</p>
+  <p class="lead"><a th:href="@{/api/items}" target="_blank">tommistavern.website/api/items</p>
+  <p class="lead"><a th:href="@{/api/customers}" target="_blank">tommistavern.website/api/customers</p>
 </div>
 	
+
 </body>
 </html>

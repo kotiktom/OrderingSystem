@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.OrderProject.domain.Category;
 import com.example.OrderProject.domain.CategoryRepository;
@@ -35,6 +36,7 @@ import com.example.OrderProject.util.GeneratePdfReport;
 
 
 @Controller
+
 public class OrderController {
 	
 	
@@ -83,23 +85,35 @@ public class OrderController {
 	
 	 // ↓↓ API SECTION ↓↓
 	 
-	 @RequestMapping(value="/apiorders", method= RequestMethod.GET)
+	 @RequestMapping(value="/api/orders", method= RequestMethod.GET)
 	 public @ResponseBody List<CustomerOrder> OrderListRest() {
-		return (List<CustomerOrder>) orderRepository.findAll();
-		
+		return (List<CustomerOrder>) orderRepository.findAll();	
 	 }
 	 
-	 @RequestMapping(value="/items", method= RequestMethod.GET)
-	 public @ResponseBody List<Item> bookListRest() {
-		return (List<Item>) repository.findAll();
-		
+	 @RequestMapping(value="/api/customers", method= RequestMethod.GET)
+	 public @ResponseBody List<Customer> CustomerListRest() {
+		return (List<Customer>) cusrepo.findAll();	
 	 }
 	 
-	 @RequestMapping(value="/items/{id}", method= RequestMethod.GET)
-	 public @ResponseBody Optional<Item> findBookListRest(@PathVariable("id") Long id) {
+	 @RequestMapping(value="/api/items", method= RequestMethod.GET)
+	 public @ResponseBody List<Item> ItemListRest() {
+		return (List<Item>) repository.findAll();		
+	 }
+	 
+	 @RequestMapping(value="/api/items/{id}", method= RequestMethod.GET)
+	 public @ResponseBody Optional<Item> ItemByIdRest(@PathVariable("id") Long id) {
 		return repository.findById(id);
-		
-	 }
+		}
+	 
+	 @RequestMapping(value="/api/customers/{id}", method= RequestMethod.GET)
+	 public @ResponseBody Optional<Customer> CustomerByIdRest(@PathVariable("id") Long id) {
+		return cusrepo.findById(id);
+		}
+	 
+	 @RequestMapping(value="/api/orders/{id}", method= RequestMethod.GET)
+	 public @ResponseBody Optional<CustomerOrder> OrderByIdRest(@PathVariable("id") Long id) {
+		return orderRepository.findById(id);
+		}
 	 // ↑↑ API SECTION ↑↑
 	 
 	 
@@ -111,6 +125,12 @@ public class OrderController {
 	public String BookList(Model model) {
 		model.addAttribute("items", repository.findAll());
 		return "/itemlist";
+		}
+	
+	@RequestMapping(value = "/apiinfo", method = RequestMethod.GET)
+	public String Apiinfo(Model model) {
+		model.addAttribute("items", repository.findAll());
+		return "/apiinfo";
 		}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -227,7 +247,6 @@ public class OrderController {
     public String editItem(@PathVariable("id") Long id, Model model) {
     	model.addAttribute("item", repository.findById(id));
     	model.addAttribute("categories", crepository.findAll());
-    	System.out.println("jesus" + 2);
     	return "/edititem";
     }
     

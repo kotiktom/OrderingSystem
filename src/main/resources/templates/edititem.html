@@ -2,20 +2,35 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+
+<style>
+.jumbotron {
+
+	border-style: solid;
+	margin: 10px;
+	background-color: 0.2;
+
+    }
+
+h4, input {
+  display: block; /* 1. oh noes, my inputs are styled as block... */
+}
+</style>
     <title>Edit the selected item</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 	<h1>Edit the selected item</h1>
-
+<div class="jumbotron">
 	  <form action="#" th:action="@{/saveitem}" th:object="${item}" method="post">
-	  	<p><input id="id" type="hidden" th:field="*{id}" /></p>
-	  	<p>Item number: <input id="itemnumber" type="text" th:field="*{itemNumber}" /></p>
-		<p>Name: <input id="name" type="text" th:field="*{name}" /></p>
-        <p>EAN: <input id="ean" type="text" th:field="*{ean}" /></p>
-        <p>Price: <input id="price" type="text" th:field="*{price}" /></p>      
-		<p><input type="submit" value="Submit" th:value="Save" /> 
+	  	<h4><input id="id" type="hidden" th:field="*{id}" /></h4>
+	  	<h4>Item number: <input id="itemnumber" type="text" th:field="*{itemNumber}" /></h4>
+		<h4>Name: <input id="name" type="text" th:field="*{name}" /></h4>
+        <h4>EAN: <input id="ean" type="text" th:field="*{ean}" /></h4>
+        <h4>Price: <input id="price" type="text" th:field="*{price}" /></h4>      
+		
 		
 		<label for="deplist">Category</label>
  			<select class="custom-select" th:field="*{category}" >
@@ -24,6 +39,8 @@
  					th:text="${category.name}">
  			</option>
          </select>		
+         <input class="custom-select" type="submit" value="Submit" th:value="Save" /> 
     </form>
+    </div>
 </body>
 </html>

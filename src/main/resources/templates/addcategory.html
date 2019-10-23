@@ -5,15 +5,28 @@
     <title>Add a new client</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <style>
+    .jumbotron {
+
+	border-style: solid;
+	margin: 10px;
+	background-color: 0.2;
+    }
+    
+    
+    </style>
 </head>
 <body>
 	<h1>Create a new category</h1>
-
+		<div class="jumbotron">
+	
 	  <form action="#" th:action="@{/savecategory}" th:object="${category}" method="post">
 	  
-		<p>Name: <input id="*{name}" type="text" th:field="*{name}" /></p>
+		<h4>Name: <input id="*{name}" type="text" th:field="*{name}" /></h4>
      
-		<p><input type="submit" value="Submit" th:value="Save" /> 	
+		<p><input class="custom-select" type="submit" value="Submit" th:value="Save" /> 	
     </form>
+    </div>
 </body>
 </html>

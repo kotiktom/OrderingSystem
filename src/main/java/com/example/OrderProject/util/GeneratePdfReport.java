@@ -222,7 +222,7 @@ public class GeneratePdfReport {
             Paragraph footer = new Paragraph(String.format(
                     "Please wire the amount due to our bank account using the following banking information:"));
             footer.add(Chunk.NEWLINE);
-            footer.add("BIC: OKOYFIHH  - IBAN: FI49 5000 9420 0287 30");
+            footer.add("BIC: OKOYFIHH  - IBAN: FI12 3456 789 0123 45");
   
           
             PdfWriter.getInstance(document, out);
