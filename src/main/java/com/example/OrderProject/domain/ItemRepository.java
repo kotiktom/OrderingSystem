@@ -14,6 +14,7 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
 	static List<Item> findById() {
 		return null;
 		}
+	void deleteByName(String string);
 	
 	@Query(
 	value = "SELECT name FROM item u WHERE name = ?1", 
@@ -34,6 +35,8 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
 	value = "SELECT item_number FROM item u WHERE name = ?1", 
 	nativeQuery = true)
 	String FindByParamNumber(String name);
+
+	
 
 	
 	

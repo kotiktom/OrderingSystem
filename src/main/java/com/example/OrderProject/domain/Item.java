@@ -2,6 +2,7 @@ package com.example.OrderProject.domain;
 
 import java.util.List;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.TableGenerator;
 
 import com.example.OrderProject.domain.Category;
-import com.example.OrderProject.domain.ItemPrice;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

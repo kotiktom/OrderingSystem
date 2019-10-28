@@ -4,7 +4,9 @@ import java.io.ByteArrayInputStream;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -122,7 +124,7 @@ public class OrderController {
 	 
 	 
 	@RequestMapping(value = "/itemlist", method = RequestMethod.GET)
-	public String BookList(Model model) {
+	public String Itemlist(Model model) {
 		model.addAttribute("items", repository.findAll());
 		return "/itemlist";
 		}
@@ -211,9 +213,16 @@ public class OrderController {
 	
 	@RequestMapping(value = "/saveorder", method = RequestMethod.POST)
 	public String saveOrder(CustomerOrder customerOrder) {
-		orderRepository.save(customerOrder);
-		return "redirect:orders";
-		}
+	  ArrayList<Integer> RemoveNulls = customerOrder.getItemAmount();
+	 RemoveNulls.removeIf(Objects::isNull);
+
+	 customerOrder.setItemAmount(RemoveNulls);
+
+	 orderRepository.save(customerOrder);
+	 return "redirect:orders";
+	 }
+
+	
 	
 	@RequestMapping(value = "/saveitem", method = RequestMethod.POST)
 	public String saveItem(Item item) {

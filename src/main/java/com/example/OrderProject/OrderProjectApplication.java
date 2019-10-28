@@ -3,6 +3,7 @@ package com.example.OrderProject;
 import java.util.ArrayList;
 
 
+
 import java.util.List;
 import org.hibernate.criterion.Order;
 import org.slf4j.Logger;
@@ -21,8 +22,6 @@ import com.example.OrderProject.domain.CustomerOrder;
 import com.example.OrderProject.domain.CustomerOrderRepository;
 import com.example.OrderProject.domain.CustomerRepository;
 import com.example.OrderProject.domain.Item;
-import com.example.OrderProject.domain.ItemPrice;
-import com.example.OrderProject.domain.ItemPriceRepository;
 import com.example.OrderProject.domain.ItemRepository;
 import com.example.OrderProject.domain.Login;
 import com.example.OrderProject.domain.LoginRepository;
@@ -44,7 +43,7 @@ public class OrderProjectApplication extends SpringBootServletInitializer {
 
 	
 	@Bean
-	public CommandLineRunner studentDemo(CategoryRepository crepository, ItemRepository repository, LoginRepository urepository, CustomerRepository cusreporistory, CustomerOrderRepository OrderRepository, ItemPriceRepository pricerepo) {
+	public CommandLineRunner studentDemo(CategoryRepository crepository, ItemRepository repository, LoginRepository urepository, CustomerRepository cusreporistory, CustomerOrderRepository OrderRepository) {
 		return (args) -> {
 			
 			Login user1 = new Login("user","$2a$06$iWJkiUp6tTCfxItYgjfp3e5z2SgYd4GKky0JENTlJq97gCVkAkV0C", "USER", "USER");

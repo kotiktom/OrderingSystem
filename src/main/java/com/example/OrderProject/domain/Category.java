@@ -49,11 +49,11 @@ public class Category {
 		this.categoryid = categoryid;
 	}
 
-	public List<Item> getBooksList() {
+	public List<Item> getItems() {
 		return items;
 	}
 
-	public void setBooksList(List<Item> booksList) {
+	public void setItems(List<Item> booksList) {
 		this.items = booksList;
 	}
 

@@ -35,7 +35,7 @@ overflow: scroll;
     
       <li><a id="helloName" class="navbar-brand" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</a></li>	  
 	
-	<li> <form class="nav-link" th:action="@{/OrderProject/logout}" method="post"> <input type="submit" value="Sign Out"/> </form> </li> 
+	<li> <form class="nav-link" th:action="@{/logout}" method="post"> <input type="submit" value="Sign Out"/> </form> </li> 
     </ul>
   </div>
 </nav>
